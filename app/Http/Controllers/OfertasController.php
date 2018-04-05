@@ -57,11 +57,21 @@ class OfertasController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show($idRoom, $id)
     {
         //
-        $oferta = Oferta::find($id);
-        return response()->json($oferta, 201);
+        $room = Room::find($idRoom);
+        if ($room) {
+            $oferta = Oferta::find($id);
+            if ($oferta) {
+                # code...
+                return response()->json($oferta, 201);
+            }else{
+                return response()->json('OFERTA NOT FOUND', 404); 
+            }
+        }else{
+            return response()->json('ROOM NOT FOUND', 404); 
+        }
     }
 
     /**
