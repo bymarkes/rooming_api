@@ -4,6 +4,9 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Oferta;
+use App\Room;
+
+
 
 class OfertasController extends Controller
 {
@@ -12,9 +15,11 @@ class OfertasController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index($id)
     {
-        return Oferta::all();
+        $room = Room::find($id);
+        $ofertas = $room->ofertas;
+        return $ofertas;
     }
 
     /**
@@ -33,11 +38,17 @@ class OfertasController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store($id, Request $request)
     {
         //
-        $oferta = Oferta::create($request->all());
-        return response()->json($oferta, 201);
+        $room = Room::find($id);
+        if ($room) {
+            # code...
+            $oferta = Oferta::create($request->all());
+            return response()->json($oferta, 201);
+        }else{
+            return response()->json('ROOM NOT FOUND', 404);
+        }
     }
 
     /**
