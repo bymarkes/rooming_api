@@ -27,3 +27,4 @@ class CategoriasRoomsController extends Controller
             return response()->json('Categoria NOT FOUND', 404);
         }
     }
+}
