@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class Establiment extends Model
 {
     //
-    protected $fillable = ['id' , 'Nom' , 'Valoracio', 'Vots', 'Preu', 'Descripcio', 'Establiment_idEstabliment', 'Categoria_idCategoria'];
+    protected $fillable = ['id' , 'Nom' , 'Provincia', 'Poblacio', 'Direccio', 'Telefon', 'Email', 'usuari_id'];
 
     public function rooms(){
     	 return $this->hasMany('App\Room');

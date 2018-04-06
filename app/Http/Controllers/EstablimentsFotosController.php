@@ -3,12 +3,12 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Room;
+use App\Foto;
 use App\Establiment;
 
 
 
-class EstablimentsRoomsController extends Controller
+class EstablimentsFotosController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -20,11 +20,10 @@ class EstablimentsRoomsController extends Controller
         $establiment = Establiment::find($id);
         if ($establiment) {
             # code...
-            $rooms = $establiment->rooms;
-            return response()->json($rooms, 200);
+            $fotos = $establiment->Fotos;
+            return $fotos;
         }else{
-            return response()->json('Categoria NOT FOUND', 404);
+            return response()->json('Establiment NOT FOUND', 404);
         }
     }
-
 }

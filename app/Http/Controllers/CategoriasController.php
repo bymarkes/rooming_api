@@ -50,7 +50,13 @@ class CategoriasController extends Controller
     {
         //
         $categoria = Categoria::find($id);
-        return response()->json($categoria, 201);
+
+        if ($categoria) {
+            # code...
+            return response()->json($categoria, 201);
+        }else{
+            return response()->json('Categoria NOT FOUND', 404);
+        }
     }
 
     /**
@@ -75,8 +81,16 @@ class CategoriasController extends Controller
     {
         //
         $categoria = Categoria::find($id);
-        $categoria->update($request->all());
-        return response()->json($categoria, 200);
+
+        if ($categoria) {
+            # code...
+            $categoria->update($request->all());
+            return response()->json($categoria, 200);
+        }else{
+            return response()->json('Categoria NOT FOUND', 404);
+        }
+
+
     }
 
     /**
@@ -89,7 +103,14 @@ class CategoriasController extends Controller
     {
         //
         $categoria = Categoria::find($id);
-        $categoria->delete();
-        return response()->json(null, 204);
+
+         if ($categoria) {
+            # code...
+            $categoria->delete();
+            return response()->json(null, 204);
+        }else{
+            return response()->json('Categoria NOT FOUND', 404);
+        }
+        
     }
 }

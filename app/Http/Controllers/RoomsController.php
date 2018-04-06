@@ -52,9 +52,9 @@ class RoomsController extends Controller
         $room = Room::find($id);
         if ($room) {
             # code...
-            return response()->json($room, 201);
+            return response()->json($room, 200);
         }else{
-            return response()->json("ROOM NOT FOUND", 404);
+            return response()->json("Room NOT FOUND", 404);
         }
     }
 
@@ -85,7 +85,7 @@ class RoomsController extends Controller
             $room->update($request->all());
             return response()->json($room, 200);
         }else{
-            return response()->json("ROOM NOT FOUND", 404);
+            return response()->json("Room NOT FOUND", 404);
         }
     }
 
@@ -99,7 +99,12 @@ class RoomsController extends Controller
     {
         //
         $room = Room::find($id);
-        $room->delete();
-        return response()->json(null, 204);
+        if ($room) {
+            # code...
+            $room->delete();
+            return response()->json(null, 204);
+        }else{
+            return response()->json('Room NOT FOUND', 404);
+        }
     }
 }

@@ -13,9 +13,9 @@ use Illuminate\Http\Request;
 |
 */
 
-Route::middleware('auth:api')->get('/user', function (Request $request) {
+/*Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
-});
+});*/
 
 Route::resource('categoria', 'CategoriasController', [
     'except' => ['edit', 'create']]);
@@ -38,13 +38,19 @@ Route::resource('room.reserva', 'ReservasController' , [
 Route::resource('room.horari', 'HorarisController' , [
     'except' => ['edit', 'create']]);
 
-Route::resource('room.foto', 'FotosController' , [
+Route::resource('room.foto', 'RoomsFotosController' , [
+    'only' => ['index']]);
+
+Route::resource('foto', 'FotosController' , [
     'except' => ['edit', 'create']]);
 
 Route::resource('establiment', 'EstablimentsController' , [
     'except' => ['edit', 'create']]);
 
 Route::resource('establiment.room', 'EstablimentsRoomsController', [
+    'only' => ['index']]);
+
+Route::resource('establiment.foto', 'EstablimentsFotosController' , [
     'only' => ['index']]);
 
 Route::resource('usuari', 'UsuarisController' , [

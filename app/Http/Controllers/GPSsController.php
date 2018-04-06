@@ -18,7 +18,7 @@ class GpssController extends Controller
     public function index($id)
     {
         $establiment = Establiment::find($id);
-        $gpss = $establiment->Gpss;
+        $gpss = $establiment->gps;
         return $gpss;
     }
 

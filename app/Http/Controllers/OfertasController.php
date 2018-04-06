@@ -18,8 +18,13 @@ class OfertasController extends Controller
     public function index($id)
     {
         $room = Room::find($id);
-        $ofertas = $room->ofertas;
-        return $ofertas;
+        if ($room) {
+            # code...
+            $ofertas = $room->ofertas;
+            return response()->json($ofertas, 200);
+        }else{
+            return response()->json('Room NOT FOUND', 404);
+        }
     }
 
     /**

@@ -18,8 +18,12 @@ class ComentarisController extends Controller
     public function index($id)
     {
         $room = Room::find($id);
-        $comentaris = $room->comentaris;
-        return $comentaris;
+        if ($room) {
+            $comentaris = $room->comentaris;
+            return $comentaris;
+        }else{
+            return response()->json('ROOM NOT FOUND', 404);
+        }
     }
 
     /**

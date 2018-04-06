@@ -50,7 +50,12 @@ class EstablimentsController extends Controller
     {
         //
         $establiment = Establiment::find($id);
-        return response()->json($establiment, 201);
+        if ($establiment) {
+            # code...
+            return response()->json($establiment, 201);
+        }else{
+            return response()->json('Categoria NOT FOUND', 404);
+        }
     }
 
     /**
@@ -75,8 +80,13 @@ class EstablimentsController extends Controller
     {
         //
         $establiment = Establiment::find($id);
-        $establiment->update($request->all());
-        return response()->json($establiment, 200);
+        if ($establiment) {
+            # code...
+            $establiment->update($request->all());
+            return response()->json($establiment, 200);
+        }else{
+            return response()->json('Establiment NOT FOUND', 404);
+        }
     }
 
     /**
@@ -89,7 +99,12 @@ class EstablimentsController extends Controller
     {
         //
         $establiment = Establiment::find($id);
-        $establiment->delete();
-        return response()->json(null, 204);
+        if ($establiment) {
+            # code...
+            $establiment->delete();
+            return response()->json(null, 204);
+        }else{
+            return response()->json('Establiment NOT FOUND', 404);
+        }
     }
 }

@@ -50,7 +50,10 @@ class GrupsController extends Controller
     {
         //
         $grup = Grup::find($id);
-        return response()->json($grup, 201);
+        if ($grup) {
+            # code...
+            return response()->json($grup, 201);
+        }
     }
 
     /**

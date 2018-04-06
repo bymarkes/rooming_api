@@ -18,8 +18,13 @@ class ReservasController extends Controller
     public function index($id)
     {
         $room = Room::find($id);
-        $reserva = $room->reservas;
-        return $reserva;
+        if ($room) {
+            # code...
+            $reservas = $room->reservas;
+            return response()->json($reservas, 200);
+        }else{
+            return response()->json('Room NOT FOUND', 404);
+        }
     }
 
     /**
@@ -47,7 +52,7 @@ class ReservasController extends Controller
             $reserva = Reserva::create($request->all());
             return response()->json($reserva, 201);
         }else{
-            return response()->json('ROOM NOT FOUND', 404);
+            return response()->json('Room NOT FOUND', 404);
         }
     }
 

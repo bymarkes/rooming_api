@@ -18,8 +18,13 @@ class HorarisController extends Controller
     public function index($id)
     {
         $room = Room::find($id);
-        $horaris = $room->Horaris;
-        return $horaris;
+        if ($room) {
+            # code...
+            $horaris = $room->Horaris;
+            return response()->json($horaris, 200);
+        }else{
+            return response()->json('Room NOT FOUND', 404);
+        }
     }
 
     /**
@@ -47,7 +52,7 @@ class HorarisController extends Controller
             $horari = Horari::create($request->all());
             return response()->json($horari, 201);
         }else{
-            return response()->json('ROOM NOT FOUND', 404);
+            return response()->json('Room NOT FOUND', 404);
         }
     }
 
@@ -70,7 +75,7 @@ class HorarisController extends Controller
                 return response()->json('Horari NOT FOUND', 404); 
             }
         }else{
-            return response()->json('ROOM NOT FOUND', 404); 
+            return response()->json('Room NOT FOUND', 404); 
         }
     }
 
@@ -106,7 +111,7 @@ class HorarisController extends Controller
                 return response()->json('Horari NOT FOUND', 404); 
             }
         }else{
-            return response()->json('ROOM NOT FOUND', 404); 
+            return response()->json('Room NOT FOUND', 404); 
         }
     }
 
@@ -130,7 +135,7 @@ class HorarisController extends Controller
                 return response()->json('Horari NOT FOUND', 404); 
             }
         }else{
-            return response()->json('ROOM NOT FOUND', 404); 
+            return response()->json('Room NOT FOUND', 404); 
         }       
     }
 }
