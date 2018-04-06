@@ -4,6 +4,9 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Reserva;
+use App\Room;
+
+
 
 class ReservasController extends Controller
 {
@@ -12,9 +15,11 @@ class ReservasController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index($id)
     {
-        return Reserva::all();
+        $room = Room::find($id);
+        $reserva = $room->reservas;
+        return $reserva;
     }
 
     /**
@@ -33,11 +38,17 @@ class ReservasController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store($id, Request $request)
     {
         //
-        $reserva = Reserva::create($request->all());
-        return response()->json($reserva, 201);
+        $room = Room::find($id);
+        if ($room) {
+            # code...
+            $reserva = Reserva::create($request->all());
+            return response()->json($reserva, 201);
+        }else{
+            return response()->json('ROOM NOT FOUND', 404);
+        }
     }
 
     /**
@@ -46,11 +57,21 @@ class ReservasController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show($idRoom, $id)
     {
         //
-        $reserva = Reserva::find($id);
-        return response()->json($reserva, 201);
+        $room = Room::find($idRoom);
+        if ($room) {
+            $reserva = Reserva::find($id);
+            if ($reserva) {
+                # code...
+                return response()->json($reserva, 201);
+            }else{
+                return response()->json('Reserva NOT FOUND', 404); 
+            }
+        }else{
+            return response()->json('ROOM NOT FOUND', 404); 
+        }
     }
 
     /**
@@ -71,12 +92,22 @@ class ReservasController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request,  $id)
+    public function update(Request $request, $idRoom, $id)
     {
         //
-        $reserva = Reserva::find($id);
-        $reserva->update($request->all());
-        return response()->json($reserva, 200);
+        $room = Room::find($idRoom);
+        if ($room) {
+            $reserva = Reserva::find($id);
+            if ($reserva) {
+                # code...
+                $reserva->update($request->all());
+                return response()->json($reserva, 200);
+            }else{
+                return response()->json('Reserva NOT FOUND', 404); 
+            }
+        }else{
+            return response()->json('ROOM NOT FOUND', 404); 
+        }
     }
 
     /**
@@ -85,11 +116,21 @@ class ReservasController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy($idRoom, $id)
     {
         //
-        $reserva = Reserva::find($id);
-        $reserva->delete();
-        return response()->json(null, 204);
+        $room = Room::find($idRoom);
+        if ($room) {
+            $reserva = Reserva::find($id);
+            if ($reserva) {
+                # code...
+                $reserva->delete();
+                return response()->json(null, 204);
+            }else{
+                return response()->json('Reserva NOT FOUND', 404); 
+            }
+        }else{
+            return response()->json('ROOM NOT FOUND', 404); 
+        }       
     }
 }

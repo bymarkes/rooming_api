@@ -4,6 +4,9 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Foto;
+use App\Room;
+
+
 
 class FotosController extends Controller
 {
@@ -12,9 +15,11 @@ class FotosController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index($id)
     {
-        return Foto::all();
+        $room = Room::find($id);
+        $fotos = $room->Fotos;
+        return $fotos;
     }
 
     /**
@@ -33,11 +38,17 @@ class FotosController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store($id, Request $request)
     {
         //
-        $foto = Foto::create($request->all());
-        return response()->json($foto, 201);
+        $room = Room::find($id);
+        if ($room) {
+            # code...
+            $foto = Foto::create($request->all());
+            return response()->json($foto, 201);
+        }else{
+            return response()->json('ROOM NOT FOUND', 404);
+        }
     }
 
     /**
@@ -46,11 +57,21 @@ class FotosController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show($idRoom, $id)
     {
         //
-        $foto = Foto::find($id);
-        return response()->json($foto, 201);
+        $room = Room::find($idRoom);
+        if ($room) {
+            $foto = Foto::find($id);
+            if ($foto) {
+                # code...
+                return response()->json($foto, 201);
+            }else{
+                return response()->json('Foto NOT FOUND', 404); 
+            }
+        }else{
+            return response()->json('ROOM NOT FOUND', 404); 
+        }
     }
 
     /**
@@ -71,12 +92,22 @@ class FotosController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request,  $id)
+    public function update(Request $request, $idRoom, $id)
     {
         //
-        $foto = Foto::find($id);
-        $foto->update($request->all());
-        return response()->json($foto, 200);
+        $room = Room::find($idRoom);
+        if ($room) {
+            $foto = Foto::find($id);
+            if ($foto) {
+                # code...
+                $foto->update($request->all());
+                return response()->json($foto, 200);
+            }else{
+                return response()->json('Foto NOT FOUND', 404); 
+            }
+        }else{
+            return response()->json('ROOM NOT FOUND', 404); 
+        }
     }
 
     /**
@@ -85,11 +116,21 @@ class FotosController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy($idRoom, $id)
     {
         //
-        $foto = Foto::find($id);
-        $foto->delete();
-        return response()->json(null, 204);
+        $room = Room::find($idRoom);
+        if ($room) {
+            $foto = Foto::find($id);
+            if ($foto) {
+                # code...
+                $foto->delete();
+                return response()->json(null, 204);
+            }else{
+                return response()->json('Foto NOT FOUND', 404); 
+            }
+        }else{
+            return response()->json('ROOM NOT FOUND', 404); 
+        }       
     }
 }

@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Comentari;
+use App\Room;
+
 
 
 class ComentarisController extends Controller
@@ -13,10 +15,11 @@ class ComentarisController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index($id)
     {
-        //
-        return Comentari::all();
+        $room = Room::find($id);
+        $comentaris = $room->comentaris;
+        return $comentaris;
     }
 
     /**
@@ -35,11 +38,17 @@ class ComentarisController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store($id, Request $request)
     {
         //
-        $comentari = Comentari::create($request->all());
-        return response()->json($comentari, 201);
+        $room = Room::find($id);
+        if ($room) {
+            # code...
+            $comentari = Comentari::create($request->all());
+            return response()->json($comentari, 201);
+        }else{
+            return response()->json('ROOM NOT FOUND', 404);
+        }
     }
 
     /**
@@ -48,11 +57,21 @@ class ComentarisController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show($idRoom, $id)
     {
         //
-        $comentari = Comentari::find($id);
-        return response()->json($comentari);
+        $room = Room::find($idRoom);
+        if ($room) {
+            $comentari = Comentari::find($id);
+            if ($comentari) {
+                # code...
+                return response()->json($comentari, 201);
+            }else{
+                return response()->json('Comentari NOT FOUND', 404); 
+            }
+        }else{
+            return response()->json('ROOM NOT FOUND', 404); 
+        }
     }
 
     /**
@@ -73,12 +92,22 @@ class ComentarisController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, $idRoom, $id)
     {
         //
-        $comentari = Comentari::find($id);
-        $comentari->update($request->all());
-        return response()->json($comentari, 200);
+        $room = Room::find($idRoom);
+        if ($room) {
+            $comentari = Comentari::find($id);
+            if ($comentari) {
+                # code...
+                $comentari->update($request->all());
+                return response()->json($comentari, 200);
+            }else{
+                return response()->json('Comentari NOT FOUND', 404); 
+            }
+        }else{
+            return response()->json('ROOM NOT FOUND', 404); 
+        }
     }
 
     /**
@@ -87,11 +116,21 @@ class ComentarisController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy($idRoom, $id)
     {
         //
-        $comentari = Comentari::find($id);
-        $comentari->delete();
-        return response()->json(null, 204);
+        $room = Room::find($idRoom);
+        if ($room) {
+            $comentari = Comentari::find($id);
+            if ($comentari) {
+                # code...
+                $comentari->delete();
+                return response()->json(null, 204);
+            }else{
+                return response()->json('Comentari NOT FOUND', 404); 
+            }
+        }else{
+            return response()->json('ROOM NOT FOUND', 404); 
+        }       
     }
 }

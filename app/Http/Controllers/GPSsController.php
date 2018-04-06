@@ -4,6 +4,9 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Gps;
+use App\Establiment;
+
+
 
 class GpssController extends Controller
 {
@@ -12,9 +15,11 @@ class GpssController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index($id)
     {
-        return Gps::all();
+        $establiment = Establiment::find($id);
+        $gpss = $establiment->Gpss;
+        return $gpss;
     }
 
     /**
@@ -33,11 +38,17 @@ class GpssController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store($id, Request $request)
     {
         //
-        $gps = Gps::create($request->all());
-        return response()->json($gps, 201);
+        $establiment = Establiment::find($id);
+        if ($establiment) {
+            # code...
+            $gps = Gps::create($request->all());
+            return response()->json($gps, 201);
+        }else{
+            return response()->json('Establiment NOT FOUND', 404);
+        }
     }
 
     /**
@@ -46,11 +57,21 @@ class GpssController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show($idEstabliment, $id)
     {
         //
-        $gps = Gps::find($id);
-        return response()->json($gps, 201);
+        $establiment = Establiment::find($idEstabliment);
+        if ($establiment) {
+            $gps = Gps::find($id);
+            if ($gps) {
+                # code...
+                return response()->json($gps, 201);
+            }else{
+                return response()->json('Gps NOT FOUND', 404); 
+            }
+        }else{
+            return response()->json('Establiment NOT FOUND', 404); 
+        }
     }
 
     /**
@@ -71,12 +92,22 @@ class GpssController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request,  $id)
+    public function update(Request $request, $idEstabliment, $id)
     {
         //
-        $gps = Gps::find($id);
-        $gps->update($request->all());
-        return response()->json($gps, 200);
+        $establiment = Establiment::find($idEstabliment);
+        if ($establiment) {
+            $gps = Gps::find($id);
+            if ($gps) {
+                # code...
+                $gps->update($request->all());
+                return response()->json($gps, 200);
+            }else{
+                return response()->json('Gps NOT FOUND', 404); 
+            }
+        }else{
+            return response()->json('Establiment NOT FOUND', 404); 
+        }
     }
 
     /**
@@ -85,11 +116,21 @@ class GpssController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy($idEstabliment, $id)
     {
         //
-        $gps = Gps::find($id);
-        $gps->delete();
-        return response()->json(null, 204);
+        $establiment = Establiment::find($idEstabliment);
+        if ($establiment) {
+            $gps = Gps::find($id);
+            if ($gps) {
+                # code...
+                $gps->delete();
+                return response()->json(null, 204);
+            }else{
+                return response()->json('Gps NOT FOUND', 404); 
+            }
+        }else{
+            return response()->json('Establiment NOT FOUND', 404); 
+        }       
     }
 }

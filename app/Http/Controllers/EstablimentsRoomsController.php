@@ -3,12 +3,12 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Horari;
 use App\Room;
+use App\Establiment;
 
 
 
-class HorarisController extends Controller
+class EstablimentsRoomsController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -17,9 +17,9 @@ class HorarisController extends Controller
      */
     public function index($id)
     {
-        $room = Room::find($id);
-        $horaris = $room->Horaris;
-        return $horaris;
+        $establiment = Establiment::find($id);
+        $rooms = $establiment->Rooms;
+        return $rooms;
     }
 
     /**
@@ -41,13 +41,13 @@ class HorarisController extends Controller
     public function store($id, Request $request)
     {
         //
-        $room = Room::find($id);
-        if ($room) {
+        $establiment = Establiment::find($id);
+        if ($establiment) {
             # code...
-            $horari = Horari::create($request->all());
-            return response()->json($horari, 201);
+            $room = Room::create($request->all());
+            return response()->json($room, 201);
         }else{
-            return response()->json('ROOM NOT FOUND', 404);
+            return response()->json('Establiment NOT FOUND', 404);
         }
     }
 
@@ -57,20 +57,20 @@ class HorarisController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($idRoom, $id)
+    public function show($idEstabliment, $id)
     {
         //
-        $room = Room::find($idRoom);
-        if ($room) {
-            $horari = Horari::find($id);
-            if ($horari) {
+        $establiment = Establiment::find($idEstabliment);
+        if ($establiment) {
+            $room = Room::find($id);
+            if ($room) {
                 # code...
-                return response()->json($horari, 201);
+                return response()->json($room, 201);
             }else{
-                return response()->json('Horari NOT FOUND', 404); 
+                return response()->json('Room NOT FOUND', 404); 
             }
         }else{
-            return response()->json('ROOM NOT FOUND', 404); 
+            return response()->json('Establiment NOT FOUND', 404); 
         }
     }
 
@@ -92,21 +92,21 @@ class HorarisController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $idRoom, $id)
+    public function update(Request $request, $idEstabliment, $id)
     {
         //
-        $room = Room::find($idRoom);
-        if ($room) {
-            $horari = Horari::find($id);
-            if ($horari) {
+        $establiment = Establiment::find($idEstabliment);
+        if ($establiment) {
+            $room = Room::find($id);
+            if ($room) {
                 # code...
-                $horari->update($request->all());
-                return response()->json($horari, 200);
+                $room->update($request->all());
+                return response()->json($room, 200);
             }else{
-                return response()->json('Horari NOT FOUND', 404); 
+                return response()->json('Gps NOT FOUND', 404); 
             }
         }else{
-            return response()->json('ROOM NOT FOUND', 404); 
+            return response()->json('Establiment NOT FOUND', 404); 
         }
     }
 
@@ -116,21 +116,21 @@ class HorarisController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($idRoom, $id)
+    public function destroy($idEstabliment, $id)
     {
         //
-        $room = Room::find($idRoom);
-        if ($room) {
-            $horari = Horari::find($id);
-            if ($horari) {
+        $establiment = Establiment::find($idEstabliment);
+        if ($establiment) {
+            $gps = Gps::find($id);
+            if ($gps) {
                 # code...
-                $horari->delete();
+                $gps->delete();
                 return response()->json(null, 204);
             }else{
-                return response()->json('Horari NOT FOUND', 404); 
+                return response()->json('Gps NOT FOUND', 404); 
             }
         }else{
-            return response()->json('ROOM NOT FOUND', 404); 
+            return response()->json('Establiment NOT FOUND', 404); 
         }       
     }
 }

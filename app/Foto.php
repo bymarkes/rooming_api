@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class Foto extends Model
 {
     //
-    protected $fillable = ['id' , 'URL' , 'Usuari_idUsuari', 'Room_idRoom', 'Establiment_idEstabliment'];
+    protected $fillable = ['id' , 'URL' , 'Usuari_idUsuari', 'room_id', 'Establiment_idEstabliment'];
 
     public function usuari(){
     	 return $this->belongsTo('App\Usuari');

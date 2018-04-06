@@ -7,22 +7,22 @@ use Illuminate\Database\Eloquent\Model;
 class Room extends Model
 {
     //
-    protected $fillable = ['id' , 'Nom' , 'Provincia', 'Poblacio', 'Direccio', 'Telefon', 'Email', 'Usuai_idUsuari'];
+    protected $fillable = ['id' , 'Nom' , 'Provincia', 'Poblacio', 'Direccio', 'Telefon', 'Email', 'usuari_id'];
 
     public function ofertas(){
     	 return $this->hasMany('App\Oferta');
     }
 
+    public function reservas(){
+    	 return $this->hasMany('App\Reserva');
+    }
+
     public function comentaris(){
-    	 return $this->hasMany('App\Comentari');
+         return $this->hasMany('App\Comentari');
     }
 
     public function horaris(){
-    	 return $this->hasMany('App\Horari');
-    }
-
-    public function reservas(){
-    	 return $this->hasMany('App\Reserva');
+         return $this->hasMany('App\Horari');
     }
 
     public function fotos(){

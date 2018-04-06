@@ -92,12 +92,22 @@ class OfertasController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request,  $id)
+    public function update(Request $request, $idRoom, $id)
     {
         //
-        $oferta = Oferta::find($id);
-        $oferta->update($request->all());
-        return response()->json($oferta, 200);
+        $room = Room::find($idRoom);
+        if ($room) {
+            $oferta = Oferta::find($id);
+            if ($oferta) {
+                # code...
+                $oferta->update($request->all());
+                return response()->json($oferta, 200);
+            }else{
+                return response()->json('OFERTA NOT FOUND', 404); 
+            }
+        }else{
+            return response()->json('ROOM NOT FOUND', 404); 
+        }
     }
 
     /**
@@ -106,11 +116,21 @@ class OfertasController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy($idRoom, $id)
     {
         //
-        $oferta = Oferta::find($id);
-        $oferta->delete();
-        return response()->json(null, 204);
+        $room = Room::find($idRoom);
+        if ($room) {
+            $oferta = Oferta::find($id);
+            if ($oferta) {
+                # code...
+                $oferta->delete();
+                return response()->json(null, 204);
+            }else{
+                return response()->json('OFERTA NOT FOUND', 404); 
+            }
+        }else{
+            return response()->json('ROOM NOT FOUND', 404); 
+        }       
     }
 }
