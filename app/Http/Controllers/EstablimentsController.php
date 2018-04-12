@@ -54,7 +54,7 @@ class EstablimentsController extends Controller
             # code...
             return response()->json($establiment, 201);
         }else{
-            return response()->json('Categoria NOT FOUND', 404);
+            return response()->json('Establiment NOT FOUND', 404);
         }
     }
 
