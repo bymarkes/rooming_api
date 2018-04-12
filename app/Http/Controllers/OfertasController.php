@@ -70,7 +70,7 @@ class OfertasController extends Controller
             $oferta = Oferta::find($id);
             if ($oferta) {
                 # code...
-                return response()->json($oferta, 201);
+                return response()->json($oferta, 200);
             }else{
                 return response()->json('OFERTA NOT FOUND', 404); 
             }

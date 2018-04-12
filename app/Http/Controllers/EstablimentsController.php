@@ -52,7 +52,7 @@ class EstablimentsController extends Controller
         $establiment = Establiment::find($id);
         if ($establiment) {
             # code...
-            return response()->json($establiment, 201);
+            return response()->json($establiment, 200);
         }else{
             return response()->json('Establiment NOT FOUND', 404);
         }

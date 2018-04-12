@@ -50,7 +50,7 @@ class ReservasController extends Controller
         if ($room) {
             # code...
             $reserva = Reserva::create($request->all());
-            return response()->json($reserva, 201);
+            return response()->json($reserva, 200);
         }else{
             return response()->json('Room NOT FOUND', 404);
         }

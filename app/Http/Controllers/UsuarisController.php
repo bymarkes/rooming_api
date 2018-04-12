@@ -50,7 +50,7 @@ class UsuarisController extends Controller
     {
         //
         $usuari = Usuari::find($id);
-        return response()->json($usuari, 201);
+        return response()->json($usuari, 200);
     }
 
     /**

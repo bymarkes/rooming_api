@@ -52,7 +52,7 @@ class GrupsController extends Controller
         $grup = Grup::find($id);
         if ($grup) {
             # code...
-            return response()->json($grup, 201);
+            return response()->json($grup, 200);
         }
     }
 

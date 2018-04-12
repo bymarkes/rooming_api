@@ -69,7 +69,7 @@ class ComentarisController extends Controller
             $comentari = Comentari::find($id);
             if ($comentari) {
                 # code...
-                return response()->json($comentari, 201);
+                return response()->json($comentari, 200);
             }else{
                 return response()->json('Comentari NOT FOUND', 404); 
             }

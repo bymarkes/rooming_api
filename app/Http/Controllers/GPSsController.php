@@ -65,7 +65,7 @@ class GpssController extends Controller
             $gps = Gps::find($id);
             if ($gps) {
                 # code...
-                return response()->json($gps, 201);
+                return response()->json($gps, 200);
             }else{
                 return response()->json('Gps NOT FOUND', 404); 
             }

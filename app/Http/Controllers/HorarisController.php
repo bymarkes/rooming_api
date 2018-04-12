@@ -70,7 +70,7 @@ class HorarisController extends Controller
             $horari = Horari::find($id);
             if ($horari) {
                 # code...
-                return response()->json($horari, 201);
+                return response()->json($horari, 200);
             }else{
                 return response()->json('Horari NOT FOUND', 404); 
             }

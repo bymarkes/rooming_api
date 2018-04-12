@@ -52,7 +52,7 @@ class FotosController extends Controller
         $foto = Foto::find($id);
         if ($foto) {
             # code...
-            return response()->json($foto, 201);
+            return response()->json($foto, 200);
         }else{
             return response()->json('FOTO NOT FOUND', 404);
         }

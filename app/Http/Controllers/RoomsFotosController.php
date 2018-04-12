@@ -21,7 +21,7 @@ class RoomsFotosController extends Controller
         if ($room) {
             # code...
             $fotos = $room->Fotos;
-            return $fotos;
+            return response()->json($fotos, 200);
         }else{
             return response()->json('Room NOT FOUND', 404);
         }

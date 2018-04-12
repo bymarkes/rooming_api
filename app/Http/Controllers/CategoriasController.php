@@ -53,7 +53,7 @@ class CategoriasController extends Controller
 
         if ($categoria) {
             # code...
-            return response()->json($categoria, 201);
+            return response()->json($categoria, 200);
         }else{
             return response()->json('Categoria NOT FOUND', 404);
         }
