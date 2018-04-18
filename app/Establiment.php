@@ -8,6 +8,7 @@ class Establiment extends Model
 {
     //
     protected $fillable = ['id' , 'Nom' , 'Provincia', 'Poblacio', 'Direccio', 'Telefon', 'Email', 'usuari_id'];
+    public $timestamps = false;
 
     public function rooms(){
     	 return $this->hasMany('App\Room');

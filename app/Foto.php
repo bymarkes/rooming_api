@@ -8,6 +8,7 @@ class Foto extends Model
 {
     //
     protected $fillable = ['id' , 'URL' , 'Usuari_idUsuari', 'room_id', 'Establiment_idEstabliment'];
+    public $timestamps = false;
 
     public function usuari(){
     	 return $this->belongsTo('App\Usuari');

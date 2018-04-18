@@ -8,6 +8,8 @@ class Usuari extends Model
 {
     //
     protected $fillable = ['id' , 'Nom' , 'Cognom', 'Nick', 'Contrasenya', 'Email', 'AnyNaixement', 'Poblacio', 'Puntuacio', 'Tipus'];
+    public $timestamps = false;
+    
 
     public function fotos(){
     	 return $this->hasMany('App\Foto');

@@ -20,7 +20,7 @@ class ComentarisController extends Controller
         $room = Room::find($id);
         if ($room) {
             $comentaris = $room->comentaris;
-            return $comentaris;
+            return response()->json($comentaris, 200);
         }else{
             return response()->json('ROOM NOT FOUND', 404);
         }

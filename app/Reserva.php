@@ -8,6 +8,8 @@ class Reserva extends Model
 {
     //
     protected $fillable = ['id' , 'Nom' , 'Provincia', 'Poblacio', 'Direccio', 'Telefon', 'Email', 'usuari_id'];
+    public $timestamps = false;
+    
 
     public function usuari(){
     	 return $this->belongsTo('App\Usuari');
