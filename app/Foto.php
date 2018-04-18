@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class Foto extends Model
 {
     //
-    protected $fillable = ['id' , 'URL' , 'Usuari_idUsuari', 'room_id', 'Establiment_idEstabliment'];
+    protected $fillable = ['id' , 'URL' , 'Usuari_idUsuari', 'room_id', 'Establiment_idEstabliment', 'principal'];
     public $timestamps = false;
 
     public function usuari(){
