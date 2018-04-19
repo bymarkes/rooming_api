@@ -3,9 +3,10 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Usuari;
+use App\Token;
 
-class UsuarisController extends Controller
+
+class TokensController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -14,7 +15,7 @@ class UsuarisController extends Controller
      */
     public function index()
     {
-        return Usuari::all();
+        //
     }
 
     /**
@@ -36,8 +37,8 @@ class UsuarisController extends Controller
     public function store(Request $request)
     {
         //
-        $usuari = Usuari::create($request->all());
-        return response()->json($usuari, 201);
+        $tokenObj = Token::create($request->all());
+        return response()->json($tokenObj, 201);
     }
 
     /**
@@ -46,16 +47,16 @@ class UsuarisController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($nick)
+    public function show($token)
     {
         //
-        $usuari = Usuari::where('Nick', $nick)->first();
-
-        if ($usuari) {
+        $tokenObj = Token::where('token', $token)->first();
+        
+        if ($tokenObj) {
             # code...
-            return response()->json($usuari, 200);
+            return response()->json($tokenObj, 200);
         }else{
-            return response()->json('Usuari NOT FOUND', 404);
+            return response()->json('Token NOT FOUND', 404);
         }
     }
 
@@ -77,18 +78,9 @@ class UsuarisController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request,  $id)
+    public function update(Request $request, $id)
     {
         //
-        $usuari = Usuari::where('Nick', $nick)->first();
-
-        if ($usuari) {
-            # code...
-            $usuari->update($request->all()); 
-            return response()->json($usuari, 200);
-        }else{
-            return response()->json('Usuari NOT FOUND', 404);
-        }
     }
 
     /**
@@ -97,11 +89,17 @@ class UsuarisController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy($token)
     {
         //
-        $usuari = Usuari::find($id);
-        $usuari->delete();
-        return response()->json(null, 204);
+        $tokenObj = Token::where('token', $token)->first();
+
+         if ($tokenObj) {
+            # code...
+            $tokenObj->delete();
+            return response()->json(null, 204);
+        }else{
+            return response()->json('Token NOT FOUND', 404);
+        }
     }
 }

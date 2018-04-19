@@ -17,8 +17,11 @@ use Illuminate\Http\Request;
     return $request->user();
 });*/
 
+Route::resource('token', 'TokensController', [
+    'only' => ['store', 'show', 'destroy']]);
+
 Route::resource('categoria', 'CategoriasController', [
-    'except' => ['edit', 'create']]);
+    'only' => ['edit', 'store', 'destroy']]);
 
 Route::resource('categoria.room', 'CategoriasRoomsController', [
     'only' => ['index']]);
@@ -54,7 +57,7 @@ Route::resource('establiment.foto', 'EstablimentsFotosController' , [
     'only' => ['index']]);
 
 Route::resource('usuari', 'UsuarisController' , [
-    'except' => ['edit', 'create']]);
+    'except' => ['index', 'edit', 'create']]);
 
 Route::resource('grup', 'GrupsController' , [
     'except' => ['edit', 'create']]);
