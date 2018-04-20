@@ -37,7 +37,16 @@ class TokensController extends Controller
     public function store(Request $request)
     {
         //
-        $tokenObj = Token::create($request->all());
+        $hasToken = Token::where('usuari_id', $request->usuari_id)->first();
+
+        if ($hasToken) {
+            $hasToken->delete();
+        }
+
+        $tokenTxt = bin2hex(random_bytes(40));
+
+        $tokenObj = Token::create($request->all() + ['token' => $tokenTxt]);
+
         return response()->json($tokenObj, 201);
     }
 

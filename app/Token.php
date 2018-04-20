@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Token extends Model
 {
     //
-    protected $fillable = ['id' , 'token' , 'usuari_id' , 'creat'];
+    protected $fillable = ['id' , 'usuari_id' , 'creat', 'token'];
     public $timestamps = false;
 
     public function usuari(){

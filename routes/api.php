@@ -21,7 +21,7 @@ Route::resource('token', 'TokensController', [
     'only' => ['store', 'show', 'destroy']]);
 
 Route::resource('categoria', 'CategoriasController', [
-    'only' => ['edit', 'store', 'destroy']]);
+    'only' => ['index','edit', 'store', 'destroy']]);
 
 Route::resource('categoria.room', 'CategoriasRoomsController', [
     'only' => ['index']]);
