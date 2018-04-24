@@ -77,7 +77,7 @@ class UsuarisController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request,  $id)
+    public function update(Request $request,  $nick)
     {
         //
         $usuari = Usuari::where('Nick', $nick)->first();
