@@ -21,7 +21,7 @@ Route::resource('token', 'TokensController', [
     'only' => ['store', 'show', 'destroy']]);
 
 Route::resource('categoria', 'CategoriasController', [
-    'only' => ['index','edit', 'store', 'destroy']]);
+    'only' => ['index', 'edit', 'show',  'store', 'destroy']]);
 
 Route::resource('categoria.room', 'CategoriasRoomsController', [
     'only' => ['index']]);
@@ -62,7 +62,10 @@ Route::resource('usuari', 'UsuarisController' , [
 Route::resource('grup', 'GrupsController' , [
     'except' => ['edit', 'create']]);
 
-Route::resource('establiment.gps', 'GPSsController' , [
+Route::resource('gps', 'GPSsController' , [
+    'only' => ['index']]);
+
+Route::resource('establiment.gps', 'EstablimentsGpsController' , [
     'except' => ['edit', 'create']]);
 
 
