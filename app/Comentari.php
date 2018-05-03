@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class Comentari extends Model
 {
     //
-    protected $fillable = ['id' , 'Text', 'Titol' , 'Valoracio', 'room_id'];
+    protected $fillable = ['id' , 'Text', 'Titol' , 'Valoracio', 'Usuari', 'room_id'];
     public $timestamps = false;
  
     public function room(){

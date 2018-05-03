@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class Room extends Model
 {
     //
-    protected $fillable = ['id' , 'Nom' , 'Valoracio', 'Vots', 'Preu', 'Descripcio', 'establiment_id', 'categoria_id'];
+    protected $fillable = ['id' , 'Nom' , 'Valoracio', 'Vots', 'Preu', 'Descripcio', 'Duracio', 'Persones', 'establiment_id', 'categoria_id'];
     public $timestamps = false;
 
     public function ofertas(){
