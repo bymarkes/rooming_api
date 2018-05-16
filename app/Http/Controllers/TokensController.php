@@ -106,7 +106,7 @@ class TokensController extends Controller
          if ($tokenObj) {
             # code...
             $tokenObj->delete();
-            return response()->json(null, 204);
+            return response()->json('Token Deleted', 204);
         }else{
             return response()->json('Token NOT FOUND', 404);
         }
