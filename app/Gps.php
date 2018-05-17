@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class Gps extends Model
 {
     //
-    protected $fillable = ['id' , 'Latitud' , 'Longitud', 'establiment_id'];
+    protected $fillable = ['id' , 'Lat' , 'Lon', 'establiment_id'];
 	public $timestamps = false;
 
     public function establiment(){
