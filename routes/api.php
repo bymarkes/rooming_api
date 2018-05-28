@@ -57,7 +57,7 @@ Route::resource('establiment.foto', 'EstablimentsFotosController' , [
     'only' => ['index']]);
 
 Route::resource('usuari', 'UsuarisController' , [
-    'except' => ['index', 'edit', 'create']]);
+    'except' => ['edit', 'create']]);
 
 Route::resource('grup', 'GrupsController' , [
     'except' => ['edit', 'create']]);

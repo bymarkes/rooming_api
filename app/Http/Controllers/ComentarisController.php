@@ -129,7 +129,7 @@ class ComentarisController extends Controller
             if ($comentari) {
                 # code...
                 $comentari->delete();
-                return response()->json(null, 204);
+                return response()->json('Comentari Deleted', 204);
             }else{
                 return response()->json('Comentari NOT FOUND', 404); 
             }

@@ -102,7 +102,7 @@ class RoomsController extends Controller
         if ($room) {
             # code...
             $room->delete();
-            return response()->json(null, 204);
+            return response()->json('Room DELETED', 204);
         }else{
             return response()->json('Room NOT FOUND', 404);
         }

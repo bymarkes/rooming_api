@@ -102,7 +102,7 @@ class FotosController extends Controller
         if ($foto) {
             # code...
             $foto->delete();
-            return response()->json(null, 204);
+            return response()->json('FOTO Deleted', 204);
         }else{
             return response()->json('FOTO NOT FOUND', 404);
         }

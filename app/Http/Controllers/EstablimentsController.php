@@ -102,7 +102,7 @@ class EstablimentsController extends Controller
         if ($establiment) {
             # code...
             $establiment->delete();
-            return response()->json(null, 204);
+            return response()->json('Establiment has been deleted', 204);
         }else{
             return response()->json('Establiment NOT FOUND', 404);
         }
